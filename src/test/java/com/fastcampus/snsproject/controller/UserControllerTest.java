@@ -2,10 +2,10 @@ package com.fastcampus.snsproject.controller;
 
 import com.fastcampus.snsproject.controller.request.UserJoinRequest;
 import com.fastcampus.snsproject.controller.request.UserLoginRequest;
+import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
 import com.fastcampus.snsproject.model.User;
 import com.fastcampus.snsproject.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,9 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO : mocking
-        when(userService.join(userName, password)).thenThrow(new SnsApplicationException());
+        when(userService.join(userName, password)).thenThrow(
+                new SnsApplicationException(ErrorCode.DUPLICATED_USER_NAME)
+        );
 
 
         mockMvc.perform(post("/api/v1/users/join")
@@ -89,7 +91,7 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO : mocking
-        when(userService.login(userName, password)).thenThrow(new SnsApplicationException());
+        when(userService.login(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.USER_NOT_FOUND));
 
 
         mockMvc.perform(post("/api/v1/users/login")
@@ -105,7 +107,7 @@ public class UserControllerTest {
         String password = "password";
 
         // TODO : mocking
-        when(userService.login(userName, password)).thenThrow(new SnsApplicationException());
+        when(userService.login(userName, password)).thenThrow(new SnsApplicationException(ErrorCode.INVALID_PASSWORD));
 
 
         mockMvc.perform(post("/api/v1/users/login")

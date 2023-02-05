@@ -1,6 +1,10 @@
 package com.fastcampus.snsproject.fixture;
 
-import com.fastcampus.snsproject.entity.UserEntity;
+import com.fastcampus.snsproject.model.UserRole;
+import com.fastcampus.snsproject.model.entity.UserEntity;
+
+import java.sql.Timestamp;
+import java.time.Instant;
 
 public class UserEntityFixture {
 
@@ -9,6 +13,8 @@ public class UserEntityFixture {
         result.setId(1);
         result.setUserName(userName);
         result.setPassword(password);
+        result.setRole(UserRole.USER);
+        result.setRegisteredAt(Timestamp.from(Instant.now()));
         return result;
     }
 
