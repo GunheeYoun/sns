@@ -35,8 +35,8 @@ public class UserControllerTest {
 
     @Test
     public void 회원가입() throws Exception {
-        String userName = "userName";
-        String password = "password";
+        String userName = "userName11111";
+        String password = "password11111";
 
         // TODO : mocking
         when(userService.join(userName, password)).thenReturn(mock(User.class));
@@ -45,8 +45,8 @@ public class UserControllerTest {
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
                         // TODO: add request body
-                        .content(objectMapper.writeValueAsBytes(new UserJoinRequest(userName,password)))
-        ).andDo(print())
+                        .content(objectMapper.writeValueAsBytes(new UserJoinRequest(userName,password))))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
@@ -66,7 +66,7 @@ public class UserControllerTest {
                         // TODO: add request body
                         .content(objectMapper.writeValueAsBytes(new UserJoinRequest(userName,password)))
                 ).andDo(print())
-                .andExpect(status().isConflict());
+                .andExpect(status().is(ErrorCode.DUPLICATED_USER_NAME.getStatus().value()));
     }
 
     @Test

@@ -12,6 +12,29 @@ import java.util.Date;
 
 public class JwtTokenUtils {
 
+    public static Boolean isValid(String token, UserDetails userDetails, String key) {
+        String username = getUsername(token, key);
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(token, key);
+    }
+
+    public static String getUsername(String token, String key) {
+        return extractAllClaims(token, key).get("username", String.class);
+    }
+
+    public static Boolean isTokenExpired(String token, String key) {
+        Date expiration = extractAllClaims(token, key).getExpiration();
+        return expiration.before(new Date());
+    }
+
+    public static Claims extractAllClaims(String token, String key) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey(key))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+
     public static String generateAccessToken(String username, String key, long expiredTimeMs) {
         return doGenerateToken(username, expiredTimeMs, key);
     }
@@ -21,9 +44,11 @@ public class JwtTokenUtils {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    private static String doGenerateToken(String username, long expireTime, String key) { // 1
+    private static String doGenerateToken(String username, long expireTime, String key) {
+        //토큰발행
         Claims claims = Jwts.claims();
         claims.put("username", username);
+
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -37,29 +62,12 @@ public class JwtTokenUtils {
 
 
 
-    public static Boolean validate(String token, UserDetails userDetails, String key) {
-        String username = getUsername(token, key);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token, key);
-    }
-
-    public static Claims extractAllClaims(String token, String key) {
-        return Jwts.parserBuilder()
-                .setSigningKey(getSigningKey(key))
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-    }
-
-    public static String getUsername(String token, String key) {
-        return extractAllClaims(token, key).get("username", String.class);
-    }
 
 
 
-    public static Boolean isTokenExpired(String token, String key) {
-        Date expiration = extractAllClaims(token, key).getExpiration();
-        return expiration.before(new Date());
-    }
+
+
+
 
 
 
