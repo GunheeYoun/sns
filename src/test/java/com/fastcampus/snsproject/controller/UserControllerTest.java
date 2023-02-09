@@ -4,6 +4,8 @@ import com.fastcampus.snsproject.controller.request.UserJoinRequest;
 import com.fastcampus.snsproject.controller.request.UserLoginRequest;
 import com.fastcampus.snsproject.exception.ErrorCode;
 import com.fastcampus.snsproject.exception.SnsApplicationException;
+import com.fastcampus.snsproject.fixture.PostEntityFixture;
+import com.fastcampus.snsproject.model.Post;
 import com.fastcampus.snsproject.model.User;
 import com.fastcampus.snsproject.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,9 +13,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -30,17 +37,20 @@ public class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Autowired
+    @MockBean
+//    @Autowired
     private UserService userService;
 
     @Test
     public void 회원가입() throws Exception {
-        String userName = "userName11111";
-        String password = "password11111";
+        String userName = "userNam";
+        String password = "passwor";
 
         // TODO : mocking
-        when(userService.join(userName, password)).thenReturn(mock(User.class));
-
+        when(userService.join(eq(userName), eq(password)))
+                .thenReturn(mock(User.class));
+//        when(userService.join(eq(userName), eq(password)))
+//                .thenReturn(Optional.empty());
 
         mockMvc.perform(post("/api/v1/users/join")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -86,6 +96,7 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
     public void 로그인시_회원가입이_안된_userName을_입력할경우_에러반환() throws Exception {
         String userName = "userName";
         String password = "password";
@@ -102,6 +113,7 @@ public class UserControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
     public void 로그인시_틀린_password를_입력할경우_에러반환() throws Exception {
         String userName = "userName";
         String password = "password";

@@ -20,7 +20,7 @@ public class User implements UserDetails {
     private String userName;
     private String password;
     private UserRole userRole;
-    private Timestamp resteredAt;
+    private Timestamp registeredAt;
     private Timestamp updateAt;
     private Timestamp deletedAt;
 
