@@ -34,8 +34,8 @@ public class UserEntity {
 
     @Column(name = "registered_at")
     private Timestamp registeredAt;
-    @Column(name = "update_at")
-    private Timestamp updateAt;
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
 
@@ -46,7 +46,7 @@ public class UserEntity {
 
     @PreUpdate
     void updateAt() {
-        this.updateAt = Timestamp.from(Instant.now());
+        this.updatedAt = Timestamp.from(Instant.now());
     }
 
     // UserEntity를 담아가는 메서드

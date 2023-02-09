@@ -35,8 +35,8 @@ public class PostEntity {
 
     @Column(name = "registered_at")
     private Timestamp registeredAt;
-    @Column(name = "update_at")
-    private Timestamp updateAt;
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
     @Column(name = "deleted_at")
     private Timestamp deletedAt;
 
@@ -47,7 +47,7 @@ public class PostEntity {
 
     @PreUpdate
     void updateAt() {
-        this.updateAt = Timestamp.from(Instant.now());
+        this.updatedAt = Timestamp.from(Instant.now());
     }
 
 

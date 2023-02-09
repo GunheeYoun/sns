@@ -32,7 +32,7 @@ public class User implements UserDetails {
                 entity.getPassword(),
                 entity.getRole(),
                 entity.getRegisteredAt(),
-                entity.getUpdateAt(),
+                entity.getUpdatedAt(),
                 entity.getDeletedAt()
         );
     }

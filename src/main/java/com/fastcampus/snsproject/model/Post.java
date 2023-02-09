@@ -28,7 +28,7 @@ public class Post {
     private String body;
     private User user;
     private Timestamp registeredAt;
-    private Timestamp updateAt;
+    private Timestamp updatedAt;
     private Timestamp deletedAt;
 
     // Entity를 DTO로 변환해주는 메소드
@@ -39,7 +39,7 @@ public class Post {
                 entity.getBody(),
                 User.fromEntity(entity.getUser()),
                 entity.getRegisteredAt(),
-                entity.getUpdateAt(),
+                entity.getUpdatedAt(),
                 entity.getDeletedAt()
         );
     }
