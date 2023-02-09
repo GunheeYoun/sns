@@ -27,7 +27,7 @@ public class PostResponse {
                 post.getBody(),
                 UserResponse.fromUser(post.getUser()),
                 post.getRegisteredAt(),
-                post.getUpdateAt(),
+                post.getUpdatedAt(),
                 post.getDeletedAt()
         );
     }
