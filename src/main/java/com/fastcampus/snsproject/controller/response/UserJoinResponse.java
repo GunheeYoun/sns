@@ -2,7 +2,6 @@ package com.fastcampus.snsproject.controller.response;
 
 import com.fastcampus.snsproject.model.User;
 import com.fastcampus.snsproject.model.UserRole;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +10,7 @@ import lombok.Getter;
 public class UserJoinResponse {
 
     private Integer id;
-    private String userName;
+    private String user;
     private UserRole role;
 
     public static UserJoinResponse fromUser(User user){
