@@ -1,7 +1,6 @@
 package com.fastcampus.snsproject.controller.response;
 
 import com.fastcampus.snsproject.model.Comment;
-import com.fastcampus.snsproject.model.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -16,7 +15,7 @@ public class CommentResponse {
     private String userName;
     private Integer postId;
     private Timestamp registeredAt;
-    private Timestamp updateAt;
+    private Timestamp updatedAt;
     private Timestamp deletedAt;
 
     public static CommentResponse fromComment(Comment comment){

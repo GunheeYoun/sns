@@ -21,7 +21,7 @@ public class User implements UserDetails {
     private String password;
     private UserRole userRole;
     private Timestamp registeredAt;
-    private Timestamp updateAt;
+    private Timestamp updatedAt;
     private Timestamp deletedAt;
 
     // Entity를 DTO로 변환해주는 메소드

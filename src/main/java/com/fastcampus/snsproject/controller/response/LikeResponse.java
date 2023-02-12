@@ -15,7 +15,7 @@ public class LikeResponse {
     private String body;
     private UserResponse user;
     private Timestamp registeredAt;
-    private Timestamp updateAt;
+    private Timestamp updatedAt;
     private Timestamp deletedAt;
 
     public static LikeResponse fromPost(Post post){
