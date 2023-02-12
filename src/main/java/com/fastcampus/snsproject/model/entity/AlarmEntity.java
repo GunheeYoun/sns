@@ -32,7 +32,7 @@ public class AlarmEntity {
     private Integer id;
 
     // 알람을 받는 사람
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // user정보가 필요할때 조회
     @JoinColumn(name = "user_id")
     private UserEntity user;
 

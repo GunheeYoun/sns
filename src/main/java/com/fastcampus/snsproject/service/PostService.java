@@ -76,6 +76,8 @@ public class PostService {
         }
 
         //delete
+        likeEntityRepository.deleteAllByPost(postEntity);
+        commentEntityRepository.deleteAllByPost(postEntity);
         postEntityRepository.delete(postEntity);
 
 
@@ -117,7 +119,7 @@ public class PostService {
     }
 
     @Transactional
-    public int likeCount(Integer postId) {
+    public Long likeCount(Integer postId) {
         // post exist
         PostEntity postEntity = getPostEntityOrException(postId);
 
